@@ -1,6 +1,6 @@
 {
   "name": "datas-store",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Datas is a fast, reliable, object based data store.",
   "main": "index.js",
   "typings": "index.d.ts",
