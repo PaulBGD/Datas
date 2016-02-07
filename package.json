@@ -1,0 +1,29 @@
+{
+  "name": "datas-store",
+  "version": "1.0.0",
+  "description": "Datas is a fast, reliable, object based data store.",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulBGD/Datas.git"
+  },
+  "keywords": [
+    "data",
+    "datastore",
+    "react"
+  ],
+  "author": "PaulBGD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PaulBGD/Datas/issues"
+  },
+  "homepage": "https://github.com/PaulBGD/Datas#readme",
+  "devDependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  }
+}
