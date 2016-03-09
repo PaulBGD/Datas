@@ -1,6 +1,6 @@
 /// <reference path="./typings/tsd.d.ts"/>
 function freeze(object) {
-    if (object !== null && typeof object === 'object' && !Object.isFrozen(object)) {
+    if (isObject(object)) {
         Object.freeze(object);
         Object.getOwnPropertyNames(object).forEach(property => {
             if (object.hasOwnProperty(property)) {
@@ -10,7 +10,7 @@ function freeze(object) {
     }
     return object;
 }
-function isObj(object) {
+function isObject(object) {
     var type = typeof object;
     return object !== null && (type === 'object') && !Array.isArray(object);
 }
@@ -20,11 +20,11 @@ function deepassign(object1, object2, object3) {
         if (assigned.indexOf(obj) === -1) {
             // make sure we haven't already merged it
             assigned.push(obj);
-            if (isObj(obj)) {
+            if (isObject(obj)) {
                 for (let prop in obj) {
                     if (obj.hasOwnProperty(prop)) {
                         let value = obj[prop];
-                        if (isObj(value)) {
+                        if (isObject(value)) {
                             if (!against[prop]) {
                                 against[prop] = {};
                             }

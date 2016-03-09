@@ -1,7 +1,7 @@
 /// <reference path="./typings/tsd.d.ts"/>
 
 function freeze<T>(object: T): T {
-    if (object !== null && typeof object === 'object' && !Object.isFrozen(object)) {
+    if (isObject(object)) {
         Object.freeze(object);
         Object.getOwnPropertyNames(object).forEach(property => {
             if (object.hasOwnProperty(property)) {
@@ -12,7 +12,7 @@ function freeze<T>(object: T): T {
     return object;
 }
 
-function isObj(object: any) {
+function isObject(object: any) {
 	var type = typeof object;
 	return object !== null && (type === 'object') && !Array.isArray(object);
 }
@@ -23,11 +23,11 @@ function deepassign<T>(object1: T, object2: T, object3: T) {
         if (assigned.indexOf(obj) === -1) {
             // make sure we haven't already merged it
             assigned.push(obj);
-            if (isObj(obj)) {
+            if (isObject(obj)) {
                 for (let prop in obj) {
                     if (obj.hasOwnProperty(prop)) {
                         let value = obj[prop];
-                        if (isObj(value)) {
+                        if (isObject(value)) {
                             if (!against[prop]) {
                                 against[prop] = {};
                             }
@@ -68,7 +68,7 @@ class DatasStore<T> {
     }
 
     public merge(partialState: T) {
-        let merged: T = deepassign({} as T, this.getState(), partialState);
+        let merged: T = deepassign<T>({} as T, this.getState(), partialState);
         this.setState(merged);
     }
 
