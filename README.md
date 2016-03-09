@@ -43,24 +43,33 @@ store.addOne(); // => "My number is now 4"
 This is only a simple example of a data store however.
 You can also use Objects, Arrays, or any other JavaScript type.
 
+## Upgrading
+
+- In v2.0.0, the hasChanged function is by default empty. This means that the watch methods will always be called when the state changes.
+- In v2.0.0, the watch function no longer returns a boolean if it was successfully removed.
+
 ## Immutability
 
-When you're using a JavaScript Object or Array, you will want to keep your state immutable. That means you have two options:
+As of v2.0.0, everything is immutable. For an example of using immutability in a project, check the todo example.
 
-a) Clone your state every time before you change a value in it.
+## Examples
 
-b) **SUGGESTED** Use Immutable.js
-
-If you don't do one of those for your Objects/Arrays and instead change the state directly, your listeners will not be called.
+There are several examples inside of the examples directory. Install webpack-dev-server globally, then run `webpack-dev-server` inside of a directory to run the example.
 
 ## Size & Performance
-Datas is currently less than 1KB minified (about 500 bytes gzipped.)
+Datas is currently less than 800 bytes minified (362 bytes gzipped.)
 
-Performance is better than alternatives (Flux/Redux) due to the fact that there's no magic going on. You simply call a method on your object, and that handles the state setting.
+Performance should be better than alternatives, however due to built in immutibility this may not be the case with large states.
+
+## Differences with Flux/Redux
 
 Unlike Redux which calls all of the reducers when an action is called, in Datas you just call the method directly.
 
 Flux and Redux both use a switch statement to check action type. You have the option of doing this by accepting a string as a parameter.
+
+## To Do
+
+- Testing outside of the examples
 
 ## License
 

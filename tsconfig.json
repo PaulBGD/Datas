@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
         "isolatedModules": false,
@@ -19,17 +19,12 @@
         "**/*.tsx",
         "!node_modules/**"
     ],
-    "compileOnSave": true,
-    "buildOnSave": true,
+    "compileOnSave": false,
+    "buildOnSave": false,
     "files": [
-        "index.d.ts",
-        "index.ts",
-        "typings/react/react-dom.d.ts",
-        "typings/react/react.d.ts",
-        "typings/tsd.d.ts",
-        "examples/react/index.tsx"
+        "index.ts"
     ],
     "atom": {
-        "rewriteTsconfig": true
+        "rewriteTsconfig": false
     }
 }

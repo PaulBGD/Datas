@@ -1,6 +1,5 @@
 /// <reference path="./typings/tsd.d.ts"/>
-
-function freeze<T>(object: T): T {
+function freeze(object) {
     if (object !== null && typeof object === 'object' && !Object.isFrozen(object)) {
         Object.freeze(object);
         Object.getOwnPropertyNames(object).forEach(property => {
@@ -11,15 +10,13 @@ function freeze<T>(object: T): T {
     }
     return object;
 }
-
-function isObj(object: any) {
-	var type = typeof object;
-	return object !== null && (type === 'object') && !Array.isArray(object);
+function isObj(object) {
+    var type = typeof object;
+    return object !== null && (type === 'object') && !Array.isArray(object);
 }
-
-function deepassign<T>(object1: T, object2: T, object3: T) {
-    let assigned: any[] = [];
-    function assign(against: any, obj: any) {
+function deepassign(object1, object2, object3) {
+    let assigned = [];
+    function assign(against, obj) {
         if (assigned.indexOf(obj) === -1) {
             // make sure we haven't already merged it
             assigned.push(obj);
@@ -32,7 +29,8 @@ function deepassign<T>(object1: T, object2: T, object3: T) {
                                 against[prop] = {};
                             }
                             assign(against[prop], value);
-                        } else {
+                        }
+                        else {
                             against[prop] = value;
                         }
                     }
@@ -40,49 +38,39 @@ function deepassign<T>(object1: T, object2: T, object3: T) {
             }
         }
     }
-
     assign(object1, object2);
     assign(object1, object3);
     return object1;
-};
-
-class DatasStore<T> {
-    private _listeners: {(state: T): any}[] = [];
-
-    private _state: T;
-
-    constructor(initialState: T) {
-        this._state = freeze<T>(initialState);
+}
+;
+class DatasStore {
+    constructor(initialState) {
+        this._listeners = [];
+        this._state = freeze(initialState);
     }
-
-    public setState(state: T) {
+    setState(state) {
         if (this.hasChanged(state)) {
-            state = freeze<T>(state);
+            state = freeze(state);
             this._state = state;
             this._listeners.forEach(listener => listener(state));
         }
     }
-
-    public getState(): T {
+    getState() {
         return this._state;
     }
-
-    public merge(partialState: T) {
-        let merged: T = deepassign({} as T, this.getState(), partialState);
+    merge(partialState) {
+        let merged = deepassign({}, this.getState(), partialState);
         this.setState(merged);
     }
-
     // this method can be overwritten for performance increases
-    public hasChanged(nextState: T): boolean {
+    hasChanged(nextState) {
         return true;
     }
-
-    public watch(listener: (state: T) => any): () => void {
+    watch(listener) {
         this._listeners.push(listener);
         return () => this._listeners.splice(this._listeners.indexOf(listener), 1);
     }
 }
-
 module.exports = DatasStore; // actual export
 module.exports.default = DatasStore; // default export for ES6 modules
 module.exports.__esModule = true; // define it as a module
