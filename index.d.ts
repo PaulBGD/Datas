@@ -6,3 +6,5 @@ export default class DatasStore<T> {
     hasChanged(nextState: T): boolean;
     watch(listener: (state: T) => any): () => void;
 }
+
+export function deepassign<T>(object1: T, object2: T, object3?: T);

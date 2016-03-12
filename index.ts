@@ -17,7 +17,7 @@ function isObject(object: any) {
 	return object !== null && (type === 'object') && !Array.isArray(object);
 }
 
-function deepassign<T>(object1: T, object2: T, object3: T) {
+export function deepassign<T>(object1: T, object2: T, object3?: T) {
     let assigned: any[] = [];
     function assign(against: any, obj: any) {
         if (assigned.indexOf(obj) === -1) {
@@ -42,7 +42,9 @@ function deepassign<T>(object1: T, object2: T, object3: T) {
     }
 
     assign(object1, object2);
-    assign(object1, object3);
+    if (object3) {
+        assign(object1, object3);
+    }
     return object1;
 };
 

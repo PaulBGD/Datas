@@ -1,4 +1,5 @@
 /// <reference path="./typings/tsd.d.ts"/>
+"use strict";
 function freeze(object) {
     if (isObject(object)) {
         Object.freeze(object);
@@ -39,9 +40,12 @@ function deepassign(object1, object2, object3) {
         }
     }
     assign(object1, object2);
-    assign(object1, object3);
+    if (object3) {
+        assign(object1, object3);
+    }
     return object1;
 }
+exports.deepassign = deepassign;
 ;
 class DatasStore {
     constructor(initialState) {

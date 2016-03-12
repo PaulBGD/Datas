@@ -1,4 +1,5 @@
 /// <reference path="./typings/tsd.d.ts"/>
+"use strict";
 function freeze(object) {
     if (isObject(object)) {
         Object.freeze(object);
@@ -39,9 +40,12 @@ function deepassign(object1, object2, object3) {
         }
     }
     assign(object1, object2);
-    assign(object1, object3);
+    if (object3) {
+        assign(object1, object3);
+    }
     return object1;
 }
+exports.deepassign = deepassign;
 ;
 var DatasStore = (function () {
     function DatasStore(initialState) {
@@ -72,7 +76,7 @@ var DatasStore = (function () {
         return function () { return _this._listeners.splice(_this._listeners.indexOf(listener), 1); };
     };
     return DatasStore;
-})();
+}());
 module.exports = DatasStore; // actual export
 module.exports.default = DatasStore; // default export for ES6 modules
 module.exports.__esModule = true; // define it as a module
