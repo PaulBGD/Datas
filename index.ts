@@ -17,7 +17,7 @@ function isObject(object: any) {
 	return object !== null && (type === 'object') && !Array.isArray(object);
 }
 
-export function deepassign<T>(object1: T, object2: T, object3?: T) {
+function deepassign<T>(object1: T, object2: T, object3?: T) {
     let assigned: any[] = [];
     function assign(against: any, obj: any) {
         if (assigned.indexOf(obj) === -1) {
@@ -88,3 +88,5 @@ class DatasStore<T> {
 module.exports = DatasStore; // actual export
 module.exports.default = DatasStore; // default export for ES6 modules
 module.exports.__esModule = true; // define it as a module
+
+module.exports.deepassign = deepassign; // export our helper function
