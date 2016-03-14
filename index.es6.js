@@ -1,5 +1,4 @@
 /// <reference path="./typings/tsd.d.ts"/>
-"use strict";
 function freeze(object) {
     if (isObject(object)) {
         Object.freeze(object);
@@ -45,7 +44,6 @@ function deepassign(object1, object2, object3) {
     }
     return object1;
 }
-exports.deepassign = deepassign;
 ;
 class DatasStore {
     constructor(initialState) {
@@ -78,3 +76,4 @@ class DatasStore {
 module.exports = DatasStore; // actual export
 module.exports.default = DatasStore; // default export for ES6 modules
 module.exports.__esModule = true; // define it as a module
+module.exports.deepassign = deepassign; // export our helper function
